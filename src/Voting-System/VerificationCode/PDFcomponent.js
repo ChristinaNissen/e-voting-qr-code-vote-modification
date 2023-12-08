@@ -154,10 +154,11 @@ export default function PDFcomponent({ dataURL }) {
             Please go to this website:{" "}
           </Text>
           <Link
-          /* OBS! This link needs to be changed after deployment! */
-            src="https://localhost:3000/verification"
+             /* OBS! This link needs to be changed after deployment! */
+            src="http://localhost:3000/verification"
             style={styles.link}
           >
+            http://localhost:3000/verification
           </Link>{" "}
           <Text style={styles.text}>
             There you can search for your unique alphanumerical verification code:
