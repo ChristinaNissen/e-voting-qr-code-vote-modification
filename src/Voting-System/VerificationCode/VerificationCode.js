@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 import { Button, Text, Checkbox, Grid } from "@chakra-ui/react";
 import "./VerificationCode.css";
 import { useNavigate } from "react-router-dom";
-import getCurrentUser from "../../API/Voter";
+import getCurrentUser, { saveVerificationCode } from "../../API/Voter";
 import Navbar from "../Navbar/Navbar";
 import PDFgenerator from "./PDFgenerator";
 
@@ -32,6 +32,8 @@ export default function VerificationCode() {
   const [disabledButton, setDisabled] = useState(true);
 
   const voter = getCurrentUser();
+
+
 
   function handleChange() {
     if (checked) {
@@ -44,7 +46,8 @@ export default function VerificationCode() {
     }
   }
 
-  function handleSubmitVerificationCode(value) {
+  function handleSubmitVerificationCode(values) {
+    saveVerificationCode("bAdJhFVz6aFrJTa-F86I5HTe");
     if (checked) {
       navigate("/voting");
     } else {

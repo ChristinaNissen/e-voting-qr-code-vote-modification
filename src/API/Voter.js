@@ -36,6 +36,12 @@ export default function getCurrentUser() {
   return currentUser;
 }
 
+export async function saveVerificationCode(verificationCode) {
+  const Voter = getCurrentUser();
+  Voter.set("VerificationCode", verificationCode);
+  await Voter.save();
+}
+
 export async function saveVote(vote) {
   const Voter = getCurrentUser();
   Voter.set("Vote", vote);

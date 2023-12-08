@@ -1,20 +1,20 @@
 /**
  * Copyright 2023 Christina Frederikke Nissen, Elisabeth Fredrich
  *
- * This file is part of e-voting-system-auto-replace.
+ * This file is part of e-voting-system-self-replace.
  *
- * e-voting-system-auto-replace is free software: you can redistribute it and/or modify
+ * e-voting-system-self-replace is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * e-voting-system-auto-replace is distributed in the hope that it will be useful,
+ * e-voting-system-self-replace is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with e-voting-system-auto-replace. If not, see <https://www.gnu.org/licenses/>.
+ * along with e-voting-system-self-replace. If not, see <https://www.gnu.org/licenses/>.
  */
 
 import {
@@ -33,13 +33,13 @@ import {
 } from "@chakra-ui/react";
 import { React, useEffect } from "react";
 import Results from "../../JSON/results.json";
-import { SearchIcon } from "@chakra-ui/icons";
 import "./VoteVerification.css";
-import "../../Info-Pages/InfoPages.css";
+import { SearchIcon } from "@chakra-ui/icons";
 import { Button } from "@chakra-ui/react";
 import { useState } from "react";
-import Navbar from "../Navbar/Navbar";
 import getCurrentUser from "../../API/Voter";
+import Navbar from "../Navbar/Navbar";
+import "../../Info-Pages/InfoPages.css";
 import { useNavigate } from "react-router-dom";
 import Result from "../../assets/Diagram-Result.png";
 
@@ -47,8 +47,18 @@ export default function VoteVerification() {
   const [input, setInput] = useState("");
   const voter = getCurrentUser();
   const navigate = useNavigate();
+  let results = new Set(Results.votes);
 
-  let results = Results.votes.sort((a, b) => {
+  if (voter !== null) {
+    results.add({
+      id: voter.id,
+      vote: voter.attributes.Vote,
+      code: voter.attributes.VerificationCode,
+    });
+  }
+
+  results = Array.from(results);
+  results.sort((a, b) => {
     if (a.code.toUpperCase() < b.code.toUpperCase()) {
       return -1;
     } else {
@@ -80,30 +90,44 @@ export default function VoteVerification() {
   };
 
   const search = () => {
-    if (input.length === 0) {
-      document.querySelector("#error-text").style.display = "none";
-    }
-    const table = document.querySelector("#result-table");
-    const children = table.childNodes;
-    let counter = 0;
-
-    children.forEach((el) => {
-      if (!el.id.startsWith(input)) {
-        el.style.display = "none";
-      } else {
-        el.style.display = "grid";
-        counter++;
+    const inputValue = input.trim(); // Trim input value to remove whitespace
+    
+    if (inputValue.length === 0) {
+      const table = document.querySelector("#result-table");
+  
+      if (table) {
+        const children = table.childNodes;
+  
+        children.forEach((el) => {
+          el.style.display = "grid"; // Show all rows when input is empty
+        });
       }
-    });
-
-    let message;
-    document.querySelector("#error-text").style.display = "none";
-
-    if (counter === 0) {
-      message = document.querySelector("#error-text");
-      message.style.display = "block";
+  
+      document.querySelector("#error-text").style.display = "none";
+      return; // Exit function when input is empty
+    }
+  
+    const table = document.querySelector("#result-table");
+  
+    if (table) {
+      const children = table.childNodes;
+      let counter = 0; // Initialize counter for found items
+  
+      children.forEach((el) => {
+        if (el.id.toLowerCase().includes(inputValue.toLowerCase())) {
+          el.style.display = "grid"; // Show matching rows
+          counter++;
+        } else {
+          el.style.display = "none"; // Hide non-matching rows
+        }
+      });
+  
+      // Show/hide error message based on search results
+      const errorMessage = document.querySelector("#error-text");
+      errorMessage.style.display = counter === 0 ? "block" : "none";
     }
   };
+  
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -122,7 +146,12 @@ export default function VoteVerification() {
               <h3 className="headline-results">
                 Result of General Election 2023
               </h3>
-              <img className="result-diagram" src={Result} alt="result"></img>
+              <img
+                className="result-diagram"
+                src={Result}
+                width={"80%"}
+                alt="result"
+              ></img>
             </Box>
           )}
           <h3 className="headline-results">Demo video</h3>
@@ -136,7 +165,6 @@ export default function VoteVerification() {
             allowfullscreen
           ></iframe>
         </GridItem>
-
         <Grid className="verification-content">
           <h1 className="blue-text headline-desktop">Vote verification</h1>
           {voter !== null ? (
@@ -192,7 +220,6 @@ export default function VoteVerification() {
                       the instruction letter and report the issue.
                     </Text>
                   </Box>
-
                   {input.length > 0 ? (
                     <Box id="result-table">
                       {results.map((result) => (
