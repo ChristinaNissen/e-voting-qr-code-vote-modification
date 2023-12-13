@@ -17,7 +17,7 @@
  * along with e-voting-system-auto-replace. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Page,
   Text,
