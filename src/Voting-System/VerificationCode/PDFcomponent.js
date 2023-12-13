@@ -1,20 +1,20 @@
 /**
  * Copyright 2023 Christina Frederikke Nissen, Elisabeth Fredrich
  *
- * This file is part of e-voting-system-auto-replace.
+ * This file is part of e-voting-system-self-replace.
  *
- * e-voting-system-auto-replace is free software: you can redistribute it and/or modify
+ * e-voting-system-self-replace is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * e-voting-system-auto-replace is distributed in the hope that it will be useful,
+ * e-voting-system-self-replace is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with e-voting-system-auto-replace. If not, see <https://www.gnu.org/licenses/>.
+ * along with e-voting-system-self-replace. If not, see <https://www.gnu.org/licenses/>.
  */
 
 import React from "react";
@@ -119,9 +119,7 @@ const styles = StyleSheet.create({
 });
 
 // Create Document Component
-export default function PDFcomponent({ dataURL }) {
-
-
+export default function PDFcomponent({ dataURL, code }) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -130,10 +128,10 @@ export default function PDFcomponent({ dataURL }) {
         </View>
         <View style={styles.view}>
           <Text style={styles.title}>
-            Your Personal Vote Verification Code
+            Your Personal Vote Verification Codes
           </Text>
           <Text style={styles.text}>
-            Please use the code below to verify the correctness of your
+            Please use one of the codes below to verify the correctness of your
             vote. You will get notified as soon as the election results are
             available and you can verify your vote.{" "}
           </Text>
@@ -147,18 +145,31 @@ export default function PDFcomponent({ dataURL }) {
             verify their vote and report problems. It will take you less than
             two minutes and is completely anonymous.
           </Text>
+          <Text style={styles.text}>
+            You have two options to verify your vote:
+          </Text>
+        </View>
+        <View style={styles.imageViewRow}>
+          <View style={styles.view}>
+            <Text style={styles.subtTitle}>Option 1:</Text>
+            <Text style={styles.explanationText}>
+              You can scan the QR code and check if the displayed voting option
+              matches your selection.
+            </Text>
+          </View>
+
+          <Image src={dataURL} style={styles.QRImage} />
         </View>
         <View style={styles.imageViewColumn}>
-          <Text style={styles.subtTitle}>How do I verify my vote?</Text>
+          <Text style={styles.subtTitle}>Option 2:</Text>
           <Text style={styles.text}>
-            Please go to this website:{" "}
+            Alternatively, you can go to this website:{" "}
           </Text>
           <Link
-             /* OBS! This link needs to be changed after deployment! */
-            src="http://localhost:3000/verification"
+            src="https://e-voting-study-2.netlify.app/verification"
             style={styles.link}
           >
-            http://localhost:3000/verification
+            https://e-voting-study-2.netlify.app/verification
           </Link>{" "}
           <Text style={styles.text}>
             There you can search for your unique alphanumerical verification code:
