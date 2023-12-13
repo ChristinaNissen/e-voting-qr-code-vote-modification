@@ -25,7 +25,6 @@ import VoteVerification from "./Voting-System/VoteVerification/VoteVerification"
 import IndividualVoteVerification from "./Voting-System/VoteVerification/IndividualVoteVerification";
 import Confirmation from "./Voting-System/Confirmation/Confirmation";
 import Voting from "./Voting-System/Voting/Voting";
-import Info0 from "./Info-Pages/info-0";
 import Info1 from "./Info-Pages/Info-1";
 import Info2 from "./Info-Pages/Info-2";
 import Info3 from "./Info-Pages/Info-3";
@@ -50,8 +49,7 @@ function App() {
       <div id="app-main">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Navigate to="/start" />} />
-            <Route path="/start" element={<Info0/>}/>
+            <Route path="/" element={<Navigate to="/info-1" />} />
             <Route path="/welcome" element={<Welcome />} />
             <Route path="/info-1" element={<Info1 />} />
             <Route path="/verification-code" element={<VerificationCode />} />
