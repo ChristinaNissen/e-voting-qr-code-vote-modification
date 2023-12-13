@@ -66,7 +66,7 @@ export default function IndividualVoteVerification() {
                   <Text mt={"1.5rem"}>Below you can see your saved vote:</Text>
 
                   <Box className="individual-vote-display">
-                  {voter.attributes.BBVote}
+                  {voter.attributes.Vote}
                   </Box>
 
                   <Box marginRight={"2rem"}>

@@ -25,7 +25,7 @@ export default function QRGenerator({ voterId }) {
     <div>
       <QRCode
         id={"qr-code"}
-        value={`https://e-voting-study-3.netlify.app/verification/${voterId}`}
+        value={`https://e-voting-system-2-study.netlify.app/verification/${voterId}`}
         size={128}
         bgColor={"#ffffff"}
         fgColor={"#000000"}
