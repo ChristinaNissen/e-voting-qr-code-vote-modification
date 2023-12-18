@@ -32,7 +32,7 @@ const navigate = useNavigate();
         </h2>
         <Text className="medium-body-text-info">
           If this was a real election, the votes would now be counted and it
-          would take some time before you could verify your vote on the official
+          would take some time before you could check the result on the official
           website.
         </Text>
         <Text className="medium-body-text-info">

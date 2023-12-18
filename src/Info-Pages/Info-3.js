@@ -40,9 +40,9 @@ export default function Info3() {
     <div className="container-info-pages">
       <div className="inner-box-info centered-info-page">
         <h2 className="h2-info-pages">Please tell us about your experience</h2>
-       {/*  <Text className="medium-body-text-info">
-          Congratulations! You have finished the second part of the study.
-        </Text> */}
+         <Text className="medium-body-text-info">
+          Congratulations! You have finished the voting system.
+        </Text> 
 
         <Text className="medium-body-text-info">
           To complete the study, please fill out a survey about your experience
@@ -78,7 +78,7 @@ export default function Info3() {
           className="red-btn"
           onClick={() =>
             (window.location.href =
-              "https://www.survey-xact.dk/LinkCollector?key=C7LXSJLQLP9J&System=3.0")
+              "https://www.survey-xact.dk/LinkCollector?key=C7LXSJLQLP9J&System=1.0")
           }
         >
           Go to survey
