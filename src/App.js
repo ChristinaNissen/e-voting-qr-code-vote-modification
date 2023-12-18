@@ -34,9 +34,9 @@ import Parse from "parse";
 import VerificationCode from "./Voting-System/VerificationCode/VerificationCode";
 import Error from "./Voting-System/Error/Error";
 
-const PARSE_APPLICATION_ID = "srTlCTo5LiFYU0mfuE2xIXZXbhBuctdYx9k9djXN";
+const PARSE_APPLICATION_ID = "hgOtPfQuPFlaXgIcOH2cX1of1QEvWscHr40WedNU";
 const PARSE_HOST_URL = "https://parseapi.back4app.com/";
-const PARSE_JAVASCRIPT_KEY = "OIRdMJgjI5JczqW5xyjfQM995HRWfyvhr5lFoKpX";
+const PARSE_JAVASCRIPT_KEY = "kwoQgvBauYg51nlo5Nv7xlg2bfcSVjU9qROgmEdt";
 
 Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
 
