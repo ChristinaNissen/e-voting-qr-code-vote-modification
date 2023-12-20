@@ -1,20 +1,20 @@
 /**
  * Copyright 2023 Christina Frederikke Nissen, Elisabeth Fredrich
  *
- * This file is part of e-voting-system-auto-replace.
+ * This file is part of e-voting-system-self-replace.
  *
- * e-voting-system-auto-replace is free software: you can redistribute it and/or modify
+ * e-voting-system-self-replace is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * e-voting-system-auto-replace is distributed in the hope that it will be useful,
+ * e-voting-system-self-replace is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with e-voting-system-auto-replace. If not, see <https://www.gnu.org/licenses/>.
+ * along with e-voting-system-self-replace. If not, see <https://www.gnu.org/licenses/>.
  */
 
 import React from "react";
@@ -32,13 +32,18 @@ import Navbar from "../Navbar/Navbar";
 import { ReportingConfirmation } from "./ReportingConformation";
 import { useState } from "react";
 import "./Reporting.css";
+import getCurrentUser from "../../API/Voter";
 
 export default function Reporting() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const voter = getCurrentUser();
 
   const validateText = (value) => {
     if (value === "") {
       return "Input field cannot be empty";
+    }
+    if (voter === null){
+      return "You cannot report a problem because you have not clicked the 'Start' button on the webpage where you are supposed to download the instructions for the voting system."
     }
   };
 
